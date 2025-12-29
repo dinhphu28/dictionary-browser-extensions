@@ -48,7 +48,7 @@ span.ph.t_respell {
 }
 
 /* hide IPA pronunciation */
-span.ph[DictionaryService-1.0.rng\:prn="IPA"] {
+span.ph[dictionaryservice-1.0.rng\:prn="IPA"] {
   display: none !important;
 }
 
