@@ -55,19 +55,46 @@ document.addEventListener("mouseup", async () => {
       `http://localhost:8080/lookup?q=${encodeURIComponent(text)}`,
     );
 
+    const notFoundPopup = `<i class="dictionary-popup">No entry found for "${text}".</i>`;
+
     if (!response.ok) {
-      wrapper.innerHTML = `<i class="dictionary-popup">No entry found for "${text}".</i>`;
+      wrapper.innerHTML = notFoundPopup;
       return;
     }
 
     const data = await response.json();
 
+    if (Array.isArray(data) && data.length === 0) {
+      wrapper.innerHTML = notFoundPopup;
+      return;
+    }
+
     wrapper.innerHTML = `
-      <div class="dictionary-popup">
-        <!-- <div class="headword">${data.headword}</div> -->
-        <div class="entry-html">${data.html}</div>
-      </div>
-    `;
+    <div class="dictionary-popup">
+      ${data
+        .map(
+          (dict) => `
+          <div class="dictionary-section">
+            <div class="dictionary-header">
+              ${dict.dictionary || dict.full_name}
+            </div>
+  
+            ${dict.entries
+              .map(
+                (entry) => `
+                <div class="dictionary-entry">
+                  <div class="entry-headword">${entry.headword}</div>
+                  <div class="entry-body">${entry.html}</div>
+                </div>
+              `,
+              )
+              .join("")}
+          </div>
+        `,
+        )
+        .join("")}
+    </div>
+  `;
   } catch (err) {
     wrapper.innerHTML = `<i>Error: ${err}</i>`;
   }
