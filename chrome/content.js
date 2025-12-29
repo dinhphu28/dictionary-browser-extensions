@@ -64,7 +64,7 @@ document.addEventListener("mouseup", async () => {
 
     wrapper.innerHTML = `
       <div class="dictionary-popup">
-        <div class="headword">${data.headword}</div>
+        <!-- <div class="headword">${data.headword}</div> -->
         <div class="entry-html">${data.html}</div>
       </div>
     `;
@@ -78,4 +78,3 @@ document.addEventListener("mousedown", (e) => {
     removePopup();
   }
 });
-
