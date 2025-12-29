@@ -71,18 +71,64 @@ span.ph:not(.t_respell) {
 
 
 /* ======== Scrollbar Styling ======== */
-/* works in Chrome + Edge + Safari */
-::-webkit-scrollbar {
-  width: 6px;
+/* smooth momentum scrolling inside popup */
+.dictionary-popup {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
-::-webkit-scrollbar-track {
+/* ===== Scrollbar base ===== */
+
+.dictionary-popup::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
   background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(120, 120, 120, 0.35);
+/* invisible track */
+.dictionary-popup::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* thin rounded thumb */
+.dictionary-popup::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  border: 2px solid transparent;
+  background: rgba(0, 0, 0, 0.28);
+  border: 3px solid transparent; /* creates inset pill */
   background-clip: content-box;
+  transition:
+    background 0.18s ease,
+    opacity 0.18s ease;
+  opacity: 0; /* hidden by default */
+}
+
+/* fade scrollbar in when hovering content */
+.dictionary-popup:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+/* when user is actively scrolling */
+.dictionary-popup::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* little more contrast when hovering the bar itself */
+.dictionary-popup::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.38);
+}
+
+/* ===== Dark mode variant ===== */
+
+@media (prefers-color-scheme: dark) {
+  .dictionary-popup::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.28);
+  }
+
+  .dictionary-popup::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.38);
+  }
+
+  .dictionary-popup::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.55);
+  }
 }
