@@ -69,6 +69,13 @@ document.addEventListener("mouseup", async () => {
       return;
     }
 
+    // wrapper.innerHTML = `
+    //   <div class="dictionary-popup">
+    //     <!-- <div class="headword">${data.headword}</div> -->
+    //     <div class="entry-html">${data.html}</div>
+    //   </div>
+    // `;
+
     wrapper.innerHTML = `
     <div class="dictionary-popup">
       ${data
@@ -83,7 +90,7 @@ document.addEventListener("mouseup", async () => {
               .map(
                 (entry) => `
                 <div class="dictionary-entry">
-                  <div class="entry-headword">${entry.headword}</div>
+                  <!-- <div class="entry-headword">${entry.headword}</div> -->
                   <div class="entry-body">${entry.html}</div>
                 </div>
               `,
