@@ -43,21 +43,26 @@
 }
 
 /* show only respelling pronunciation like Apple Dictionary */
-span.ph.t_respell {
-  display: inline;
+span.ph:not(.t_respell) {
+  display: none;
 }
 
-/* hide IPA pronunciation */
-span.ph[dictionaryservice-1.0.rng\:prn="IPA"] {
-  display: none !important;
-}
-
-/* optional: hide other non-US variants */
-span.ph[dialect="BrE"] {
-  display: none !important;
-}
-
-/* spacing after pronunciation */
-span.ph.t_respell::after {
-  content: " ";
-}
+/*/* show only respelling pronunciation like Apple Dictionary */*/
+/*span.ph.t_respell {*/
+/*  display: inline;*/
+/*}*/
+/**/
+/*/* hide IPA pronunciation */*/
+/*span.ph[dictionaryservice-1.0.rng\:prn="IPA"] {*/
+/*  display: none !important;*/
+/*}*/
+/**/
+/*/* optional: hide other non-US variants */*/
+/*span.ph[dialect="BrE"] {*/
+/*  display: none !important;*/
+/*}*/
+/**/
+/*/* spacing after pronunciation */*/
+/*span.ph.t_respell::after {*/
+/*  content: " ";*/
+/*}*/
