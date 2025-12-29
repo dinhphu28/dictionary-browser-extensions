@@ -1,5 +1,39 @@
+/* popup container look */
+:host {
+  all: initial;
+}
 
-.div-entry {
-    border-top: 2px solid black;
-    padding-bottom: 50px;
+/* main container inside shadow root */
+.dictionary-popup {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.15);
+  box-shadow: 0 12px 40px rgba(0,0,0,.25);
+  padding: 14px 16px;
+  max-width: 420px;
+  max-height: 320px;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Arial;
+}
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+  .dictionary-popup {
+    background: rgba(30, 30, 30, .95);
+    color: #f2f2f2;
+    border: 1px solid rgba(255,255,255,.15);
+  }
+}
+
+/* headword like Apple Lookup */
+.headword {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* smaller body text */
+.entry-html {
+  font-size: 14px;
+  line-height: 1.45;
 }
