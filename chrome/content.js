@@ -56,7 +56,7 @@ document.addEventListener("mouseup", async () => {
     );
 
     if (!response.ok) {
-      wrapper.innerHTML = `<i>No entry found for "${text}".</i>`;
+      wrapper.innerHTML = `<i class="dictionary-popup">No entry found for "${text}".</i>`;
       return;
     }
 
