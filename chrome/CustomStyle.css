@@ -42,6 +42,7 @@
   line-height: 1.45;
 }
 
+/* ======== Pronunciation Styling ======== */
 /* show only respelling pronunciation like Apple Dictionary */
 span.ph:not(.t_respell) {
   display: none;
@@ -66,3 +67,33 @@ span.ph:not(.t_respell) {
 /*span.ph.t_respell::after {*/
 /*  content: " ";*/
 /*}*/
+
+
+/* ======== Scrollbar Styling ======== */
+/* works in Chrome + Edge + Safari */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+}
