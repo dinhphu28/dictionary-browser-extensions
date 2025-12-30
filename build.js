@@ -44,7 +44,6 @@ function copySharedSrc(target) {
   copyRecursive(srcDir, outDir);
 }
 
-// function build(target, manifestFile) {
 function build(target) {
   const outDir = path.join(DIST, target);
   console.log(`\n👉 Building ${target}`);
@@ -54,19 +53,11 @@ function build(target) {
   copySharedSrc(target);
   copySpecificSrc(target);
 
-  // copy manifest.json
-  // fs.copyFileSync(
-  //   path.join(ROOT, manifestFile),
-  //   path.join(outDir, "manifest.json")
-  // );
-
   console.log(`✅ ${target} ready: ${outDir}`);
 }
 
 ensureDir(DIST);
 
-// build("chrome", "manifest.chrome.json");
-// build("firefox", "manifest.firefox.json");
 build("chrome");
 build("firefox");
 
