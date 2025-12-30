@@ -84,7 +84,10 @@ document.addEventListener("mouseup", async () => {
                 (entry) => `
                 <div class="dictionary-entry">
                   <!-- <div class="entry-headword">${entry.headword}</div> -->
-                  <div class="entry-body">${entry.html}</div>
+                  <div class="entry-body clamp" data-expanded="false">
+                    <div class="entry-body">${entry.html}</div>
+                  </div>
+                  <div class="more-toggle">More</div>
                 </div>
               `,
               )
@@ -98,6 +101,23 @@ document.addEventListener("mouseup", async () => {
   } catch (err) {
     wrapper.innerHTML = `<i>Error: ${err}</i>`;
   }
+
+  popup.querySelectorAll(".more-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const body = btn.previousElementSibling;
+      const expanded = body.getAttribute("data-expanded") === "true";
+
+      if (expanded) {
+        body.classList.add("clamp");
+        body.setAttribute("data-expanded", "false");
+        btn.textContent = "More";
+      } else {
+        body.classList.remove("clamp");
+        body.setAttribute("data-expanded", "true");
+        btn.textContent = "Less";
+      }
+    });
+  });
 });
 
 document.addEventListener("mousedown", (e) => {
