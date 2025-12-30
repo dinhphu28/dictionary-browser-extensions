@@ -9,7 +9,14 @@ function removePopup() {
   }
 }
 
-document.addEventListener("mouseup", async () => {
+document.addEventListener("mouseup", async (event) => {
+  // if popup exists and the click is inside it → ignore
+  if (popup) {
+    const path = event.composedPath(); // works with Shadow DOM
+    if (path.includes(popup)) {
+      return; // do NOT close or rebuild popup
+    }
+  }
   removePopup();
 
   const selection = window.getSelection();
@@ -83,9 +90,8 @@ document.addEventListener("mouseup", async () => {
               .map(
                 (entry) => `
                 <div class="dictionary-entry">
-                  <!-- <div class="entry-headword">${entry.headword}</div> -->
                   <div class="entry-body clamp" data-expanded="false">
-                    <div class="entry-body">${entry.html}</div>
+                    ${entry.html}
                   </div>
                   <div class="more-toggle">More</div>
                 </div>
@@ -102,7 +108,7 @@ document.addEventListener("mouseup", async () => {
     wrapper.innerHTML = `<i>Error: ${err}</i>`;
   }
 
-  popup.querySelectorAll(".more-toggle").forEach((btn) => {
+  wrapper.querySelectorAll(".more-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const body = btn.previousElementSibling;
       const expanded = body.getAttribute("data-expanded") === "true";
