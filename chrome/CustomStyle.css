@@ -183,3 +183,52 @@ span.ph[dialect="AmE"]:not(.t_respell) {
     background: rgba(255, 255, 255, 0.55);
   }
 }
+
+/* ======= More toggle button styling ======= */
+/* clamp entry text to 4 lines */
+.entry-body.clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
+}
+
+/* fade at bottom like Apple Lookup */
+.entry-body.clamp::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.4em; 
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,1)
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  .entry-body.clamp::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(30,30,30,0),
+      rgba(30,30,30,1)
+    );
+  }
+}
+
+/* “More” button look */
+.more-toggle {
+  font-size: 13px;
+  color: #0060df;
+  cursor: pointer;
+  user-select: none;
+  width: max-content;
+  margin-top: 3px;
+}
+
+.more-toggle:hover {
+  text-decoration: underline;
+}
