@@ -99,28 +99,6 @@ span.ph[dialect="AmE"]:not(.t_respell) {
   display: none;
 }
 
-/*/* show only respelling pronunciation like Apple Dictionary */
-*/
-/*span.ph.t_respell {*/
-/*  display: inline;*/
-/*}*/
-/**/
-/*/* hide IPA pronunciation */*/
-/*span.ph[dictionaryservice-1.0.rng\:prn="IPA"] {*/
-/*  display: none !important;*/
-/*}*/
-/**/
-/*/* optional: hide other non-US variants */*/
-/*span.ph[dialect="BrE"] {*/
-/*  display: none !important;*/
-/*}*/
-/**/
-/*/* spacing after pronunciation */*/
-/*span.ph.t_respell::after {*/
-/*  content: " ";*/
-/*}*/
-
-
 /* ======== Scrollbar Styling ======== */
 /* smooth momentum scrolling inside popup */
 .dictionary-popup {
@@ -201,11 +179,11 @@ span.ph[dialect="AmE"]:not(.t_respell) {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 1.4em; 
+  height: 1.4em;
   background: linear-gradient(
     to bottom,
-    rgba(255,255,255,0),
-    rgba(255,255,255,1)
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1)
   );
 }
 
@@ -213,8 +191,8 @@ span.ph[dialect="AmE"]:not(.t_respell) {
   .entry-body.clamp::after {
     background: linear-gradient(
       to bottom,
-      rgba(30,30,30,0),
-      rgba(30,30,30,1)
+      rgba(30, 30, 30, 0),
+      rgba(30, 30, 30, 1)
     );
   }
 }
