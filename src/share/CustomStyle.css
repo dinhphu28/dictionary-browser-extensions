@@ -1,0 +1,212 @@
+/* popup container look */
+:host {
+  all: initial;
+}
+
+/* headword like Apple Lookup */
+.headword {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* smaller body text */
+.entry-html {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* ======= Multiple Entries ======= */
+/* popup container */
+.dictionary-popup {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+  padding: 10px 14px;
+  max-width: 480px;
+  max-height: 360px;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial;
+  color: #111;
+}
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+  .dictionary-popup {
+    background: rgba(30, 30, 30, 0.95);
+    color: #f2f2f2;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* per-dictionary group */
+.dictionary-section + .dictionary-section {
+  margin-top: 12px;
+}
+
+.dictionary-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+
+  margin: 6px 0 6px 0;
+}
+
+/* the horizontal line */
+.dictionary-header::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.22);
+  margin-top: 2px;
+}
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+  .dictionary-header::after {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+/* each entry */
+.dictionary-entry {
+  margin-bottom: 8px;
+}
+
+/* headword */
+.entry-headword {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+/* definition body */
+.entry-body {
+  font-size: 14px;
+  line-height: 1.45;
+}
+/* ======= END - Multiple Entries ======= */
+
+/* ======== Pronunciation Styling ======== */
+
+/* American English only — hide IPA */
+span.ph[dialect="AmE"]:not(.t_respell) {
+  display: none;
+}
+
+/* ======== Scrollbar Styling ======== */
+/* smooth momentum scrolling inside popup */
+.dictionary-popup {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* ===== Scrollbar base ===== */
+
+.dictionary-popup::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+}
+
+/* invisible track */
+.dictionary-popup::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* thin rounded thumb */
+.dictionary-popup::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 3px solid transparent; /* creates inset pill */
+  background-clip: content-box;
+  transition:
+    background 0.18s ease,
+    opacity 0.18s ease;
+  opacity: 0; /* hidden by default */
+}
+
+/* fade scrollbar in when hovering content */
+.dictionary-popup:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+/* when user is actively scrolling */
+.dictionary-popup::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* little more contrast when hovering the bar itself */
+.dictionary-popup::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.38);
+}
+
+/* ===== Dark mode variant ===== */
+
+@media (prefers-color-scheme: dark) {
+  .dictionary-popup::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.28);
+  }
+
+  .dictionary-popup::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.38);
+  }
+
+  .dictionary-popup::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.55);
+  }
+}
+
+/* ======= More toggle button styling ======= */
+/* clamp entry text to 4 lines */
+.entry-body.clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
+}
+
+/* fade at bottom like Apple Lookup */
+.entry-body.clamp::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.4em;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1)
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  .entry-body.clamp::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(30, 30, 30, 0),
+      rgba(30, 30, 30, 1)
+    );
+  }
+}
+
+/* “More” button look */
+.more-toggle {
+  font-size: 13px;
+  color: #0060df;
+  cursor: pointer;
+  user-select: none;
+  width: max-content;
+  margin-top: 3px;
+}
+
+.more-toggle:hover {
+  text-decoration: underline;
+}
