@@ -14,6 +14,18 @@ function removePopup() {
   }
 }
 
+function lookup(word) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage(
+      { type: "lookup", word },
+      (response) => {
+        if (!response || !response.ok) reject(response?.error);
+        else resolve(response.data);
+      }
+    );
+  });
+}
+
 document.addEventListener("mouseup", async (event) => {
   // if popup exists and the click is inside it → ignore
   if (popup) {
@@ -63,18 +75,9 @@ document.addEventListener("mouseup", async (event) => {
   shadowRoot.appendChild(wrapper);
 
   try {
-    const response = await fetch(
-      `http://localhost:8080/lookup?q=${encodeURIComponent(text)}`,
-    );
-
     const notFoundPopup = `<i class="dictionary-popup">No entry found for "${text}".</i>`;
 
-    if (!response.ok) {
-      wrapper.innerHTML = notFoundPopup;
-      return;
-    }
-
-    const data = await response.json();
+    const data = await lookup(text);
 
     if (Array.isArray(data) && data.length === 0) {
       wrapper.innerHTML = notFoundPopup;
