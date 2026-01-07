@@ -3,7 +3,7 @@
   "name": "My Dictionary Lookup",
   "version": "1.0",
   "description": "Highlight to look up dictionary definitions.",
-  "permissions": [],
+  "permissions": ["nativeMessaging"],
   "host_permissions": ["http://localhost:8080/*"],
   "content_scripts": [
     {

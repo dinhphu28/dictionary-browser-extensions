@@ -5,7 +5,7 @@ function renderDictionaryResults(data, query) {
 
   return `
     <div class="dictionary-popup">
-      ${data
+      ${data.lookup_results
         .map(
           (dict) => `
           <div class="dictionary-section">
