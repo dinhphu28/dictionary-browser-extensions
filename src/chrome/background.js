@@ -38,7 +38,8 @@ function nativeLookup(word) {
 
     port.onMessage.addListener(listener);
 
-    port.postMessage({ query: word });
+    // port.postMessage({ query: word });
+    port.postMessage({ type: 1, query: word });
   });
 }
 
@@ -64,8 +65,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   (async () => {
     // NOTE: 1) Try native messaging first
     try {
-      const data = await nativeLookup(msg.word);
+      const nativeMessage = await nativeLookup(msg.word);
+      // NOTE: data is in nativeMessage.result
+      const data = nativeMessage.result;
       sendResponse({ ok: true, data, source: "native" });
+      console.log("DATA FROM NATIVE:", data);
       return;
     } catch (err) {
       console.warn("Native lookup failed, falling back to HTTP:", err);
