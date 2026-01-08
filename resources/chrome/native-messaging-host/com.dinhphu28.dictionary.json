@@ -1,0 +1,7 @@
+{
+  "name": "com.dinhphu28.dictionary",
+  "description": "Local dictionary native host",
+  "path": "/home/dinhphu28/ghq/github.com/dinhphu28/go-dictionary/.out/native",
+  "type": "stdio",
+  "allowed_origins": ["chrome-extension://kpgiaenkniiaacjbiipbmcdjfbjmgmll/"]
+}
