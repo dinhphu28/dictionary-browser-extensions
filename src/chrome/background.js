@@ -1,20 +1,39 @@
+import { IconState, updateState } from "./badge/status.js";
+
 // Chrome MV3 uses chrome.*, add shim for Firefox later if needed
 self.addEventListener("message", () => {}); // keeps worker alive briefly
+
+const MsgType = {
+  PONG: 3,
+  RESULT: 1,
+};
 
 let nativePort = null;
 
 function ensureNativePort() {
+  if (!nativePort) {
+    updateState(IconState.DISCONNECTED);
+  }
   if (nativePort) return nativePort;
 
   try {
-    nativePort = chrome.runtime.connectNative(
-      "com.dinhphu28.dictionary",
-    );
+    nativePort = chrome.runtime.connectNative("com.dinhphu28.dictionary");
 
     nativePort.onDisconnect.addListener(() => {
       console.warn("Native host disconnected");
       nativePort = null;
     });
+
+    const stateListener = (msg) => {
+      if (msg.type === MsgType.PONG && msg.ready === true) {
+        updateState(IconState.READY);
+      }
+      if (msg.type === MsgType.PONG && msg.ready === false) {
+        updateState(IconState.DISCONNECTED);
+      }
+    };
+    nativePort.onMessage.addListener(stateListener);
+    nativePort.postMessage({ type: 2, query: "" });
 
     return nativePort;
   } catch (e) {
@@ -38,7 +57,6 @@ function nativeLookup(word) {
 
     port.onMessage.addListener(listener);
 
-    // port.postMessage({ query: word });
     port.postMessage({ type: 1, query: word });
   });
 }
@@ -49,17 +67,8 @@ function httpLookup(word) {
   ).then((r) => r.json());
 }
 
-// NOTE: This is a fallback worker that uses a local HTTP server for lookups.
-
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type !== "lookup") return;
-
-  // httpLookup(msg.word)
-  //   .then((data) => sendResponse({ ok: true, data }))
-  //   .catch((err) => sendResponse({ ok: false, error: String(err) }));
-  //
-  // // IMPORTANT for async responses
-  // return true;
 
   // NOTE: NEW VERSION USING NATIVE MESSAGING
   (async () => {
