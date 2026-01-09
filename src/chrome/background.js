@@ -25,10 +25,13 @@ function ensureNativePort() {
     });
 
     const stateListener = (msg) => {
-      if (msg.type === MsgType.PONG && msg.ready === true) {
+      if (msg?.type !== MsgType.PONG) {
+        return;
+      }
+      if (msg.ready === true) {
         updateState(IconState.READY);
       }
-      if (msg.type === MsgType.PONG && msg.ready === false) {
+      if (msg.ready === false) {
         updateState(IconState.DISCONNECTED);
       }
     };
@@ -51,8 +54,10 @@ function nativeLookup(word) {
     }
 
     const listener = (msg) => {
-      port.onMessage.removeListener(listener);
-      resolve(msg);
+      if (msg?.type === MsgType.RESULT) {
+        port.onMessage.removeListener(listener);
+        resolve(msg);
+      }
     };
 
     port.onMessage.addListener(listener);
