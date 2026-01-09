@@ -1,10 +1,25 @@
+const MatchType = {
+  EXACT_MATCH: 1,
+  APPROXIMATE_MATCH: 2,
+};
+
 function renderDictionaryResults(data, query) {
   if (Array.isArray(data) && data.length === 0) {
     return `<i class="dictionary-popup">No entry found for "${query}".</i>`;
   }
+  const matchType = data.match_type;
+  const suggestSentence = `
+    <div class="suggest-sentence">
+      <i>Did you mean: <b>${data.suggestions[0]}</b>?</i>
+    </div>
+  `;
+
+  const metaSentence =
+    matchType === MatchType.APPROXIMATE_MATCH ? suggestSentence : "";
 
   return `
     <div class="dictionary-popup">
+      ${metaSentence}
       ${data.lookup_results
         .map(
           (dict) => `
