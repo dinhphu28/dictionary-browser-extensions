@@ -75,6 +75,9 @@ async function triggerLookup() {
     const data = await lookup(text);
     wrapper.innerHTML = renderDictionaryResults(data, text);
     wireMoreLessToggles(wrapper);
+    requestAnimationFrame(() => {
+      positionPopup(rect);
+    });
   } catch (err) {
     wrapper.innerHTML = `<i>Error: ${err}</i>`;
   }

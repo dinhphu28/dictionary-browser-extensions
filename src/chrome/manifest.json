@@ -23,8 +23,7 @@
         "content/lookup.js",
         "content/render.js",
         "content/toggle.js",
-        "content/listeners.js",
-        "badge/status.js"
+        "content/listeners.js"
       ],
       "run_at": "document_idle"
     }
